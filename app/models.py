@@ -58,6 +58,7 @@ class Market(models.Model):
     catagory = models.CharField(db_column="catagory", max_length=200, null=False)
     status = models.CharField(db_column="status", max_length=100, null=False)
     image = models.CharField(db_column="image", max_length=200, null=True)
+    imageUrl = models.CharField(db_column="imageUrl", max_length=200, null=True)
 
     class Meta:
         managed = True

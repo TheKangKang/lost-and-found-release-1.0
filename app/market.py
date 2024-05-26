@@ -28,21 +28,24 @@ def get_Markets(request):
 # 添加用户
 def add_Market(request):
     data = json.loads(request.body.decode("utf-8"))
+    # print(data['imageUrl'])
 
+    #  图片上传
     #  添加
     try:
-        print("wohao")
+        # print("wohao")
         obj_Market = Market(name=data['name'], price=data['price'],
                         owner=data['owner'], nikcname=data['nickname'],
                             catagory=data['catagory'], mobile=data['mobile'],
-                        status=data['status'], image=data['image'])
-        print("nihao")
+                        status=data['status'], image=data['image'],imageUrl=data['imageUrl'])
+        # print("nihao")
 
         cnt = Market.objects.filter(name=data['name']).count()
         if cnt > 0:
             return JsonResponse({'code': 2, 'msg': "商品已存在！"})
 
         #  执行添加
+        # print(obj_Market.imageUrl)
         obj_Market.save()
         try:
             obj_Markets = Market.objects.all().values()
@@ -72,6 +75,7 @@ def update_Market(request):
         obj_Market.category = data['category']
         obj_Market.status = data['status']
         obj_Market.image = data['image']
+        obj_Market.imageUrl = data['imageUrl']
 
         try:
             obj_Market.save()
