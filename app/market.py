@@ -65,14 +65,15 @@ def update_Market(request):
 
     #  添加
     try:
-        #  查找到要修改的用户
-        obj_Market = Market.objects.get(name=data['name'])
+        #  查找到要修改
+        obj_Market = Market.objects.get(id=data['id'])
         #  执行修改
-        obj_Market.name = data['password']
+        obj_Market.name = data['name']
         obj_Market.price = data['price']
         obj_Market.owner = data['owner']
+        obj_Market.nikcname = data['nikcname']
         obj_Market.mobile = data['mobile']
-        obj_Market.category = data['category']
+        obj_Market.category = data['catagory']
         obj_Market.status = data['status']
         obj_Market.image = data['image']
         obj_Market.imageUrl = data['imageUrl']
@@ -94,14 +95,14 @@ def query_Markets(request):
     data = json.loads(request.body.decode('utf-8'))
 
     try:
-        obj_Markets = Market.objects.filter(Q(name__contains=data['inputstr']) | Q(price__contains=data['inputstr']) |
-                                        Q(mobile__contains=data['inputstr']) | Q(nickname__contains=data['inputstr']) |
+        obj_Markets = Market.objects.filter(Q(name__contains=data['inputstr']) | Q(price__contains=data['inputstr']) | Q(owner__contains=data['inputstr']) |
+                                        Q(mobile__contains=data['inputstr']) | Q(nikcname__contains=data['inputstr']) |
                                         Q(catagory__contains=data['inputstr']) | Q(status__contains=data['inputstr'])).values()
         Markets = list(obj_Markets)
         return JsonResponse({'code': 1, 'data': Markets})
     except Exception as e:
         # 异常
-        return JsonResponse({'code': 1, 'msg': "查询用户信息失败：" + str(e)})
+        return JsonResponse({'code': 1, 'msg': "查询商品信息失败：" + str(e)})
     
     
 def delete_Market(request):
@@ -110,7 +111,7 @@ def delete_Market(request):
     #  添加
     try:
         #  查找到要删除的学生
-        obj_Market = Market.objects.get(Marketname=data['Marketname'])
+        obj_Market = Market.objects.get(id=data['id'])
 
         obj_Market.delete()
         try:

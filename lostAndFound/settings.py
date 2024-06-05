@@ -129,7 +129,9 @@ CORS_ORIGIN_WHITELIST = (
     "http://localhost:5500",
     "http://10.174.54.61:5500",
     "http://10.169.116.7:5500",
-    "http://10.169.21.168:5500"
+    "http://10.169.21.168:5500",
+    "http://192.168.124.19:5500",
+    "http://10.169.102.254:5500"
 )
 CORS_ALLOW_CREDENTIALS = True
 
